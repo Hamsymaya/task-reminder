@@ -189,8 +189,36 @@ function findZoneForPosition(lat, lng) {
   return allZones().find(z => distanceMeters(lat, lng, z.lat, z.lng) <= z.radius) || null;
 }
 
+let audioCtx = null;
+
+// resume the audio context on any tap, since browsers block sound until a user gesture happens
+document.addEventListener("click", () => {
+  if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+});
+
+function playSound() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = audioCtx.currentTime;
+    [880, 660].forEach((freq, i) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.2, now + i * 0.18);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.18 + 0.15);
+      osc.connect(gain).connect(audioCtx.destination);
+      osc.start(now + i * 0.18);
+      osc.stop(now + i * 0.18 + 0.16);
+    });
+  } catch (e) {
+    // ignore if audio isn't available on this device
+  }
+}
+
 function notify(zoneName, pendingTasks) {
   const body = pendingTasks.map(t => "• " + t.text).join("\n");
+  playSound();
   if (Notification.permission === "granted") {
     new Notification(`You're in ${zoneName}`, { body });
   } else {
@@ -243,6 +271,7 @@ function startTracking() {
 }
 
 startBtn.addEventListener("click", async () => {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if ("Notification" in window && Notification.permission === "default") {
     await Notification.requestPermission();
   }
