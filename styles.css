@@ -1,0 +1,114 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  margin: 0;
+  background: #f4f6f5;
+  color: #1a1a1a;
+}
+
+header {
+  background: #1e6f5c;
+  color: white;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+header h1 { margin: 0 0 0.5rem; font-size: 1.4rem; }
+
+#status {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+#startBtn {
+  background: white;
+  color: #1e6f5c;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+section {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+h2 { margin-top: 0; font-size: 1.05rem; }
+
+#taskForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#taskForm input, #taskForm select, #taskForm button {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#taskForm button {
+  background: #1e6f5c;
+  color: white;
+  border: none;
+  font-weight: 600;
+}
+
+#taskList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#taskList li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+#taskList li:last-child { border-bottom: none; }
+
+.task-zone {
+  font-size: 0.75rem;
+  background: #e4f2ee;
+  color: #1e6f5c;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.task-text { flex: 1; }
+
+.task-text.done {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.empty {
+  color: #999;
+  font-style: italic;
+}

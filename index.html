@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nairobi Task Reminder</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+<meta name="theme-color" content="#1e6f5c">
+</head>
+<body>
+
+<header>
+  <h1>Task Reminder</h1>
+  <p id="status">Location: not tracking yet</p>
+  <button id="startBtn">Start tracking my location</button>
+</header>
+
+<main>
+  <section id="addTask">
+    <h2>Add a task</h2>
+    <form id="taskForm">
+      <input type="text" id="taskText" placeholder="e.g. Pick up documents" required>
+      <select id="taskZone" required>
+        <option value="" disabled selected>Where?</option>
+        <option value="Upper Hill">Upper Hill</option>
+        <option value="Westlands">Westlands</option>
+        <option value="Industrial Area">Industrial Area</option>
+        <option value="CBD">City Center (CBD)</option>
+        <option value="Langata">Langata</option>
+      </select>
+      <button type="submit">Add task</button>
+    </form>
+  </section>
+
+  <section id="taskListSection">
+    <h2>Your tasks</h2>
+    <ul id="taskList"></ul>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
