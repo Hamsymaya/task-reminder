@@ -167,10 +167,17 @@ taskForm.addEventListener("submit", (e) => {
   const zone = document.getElementById("taskZone").value;
   if (!text || !zone) return;
 
-  tasks.push({ id: Date.now(), text, zone, done: false });
+  const newTask = { id: Date.now(), text, zone, done: false };
+  tasks.push(newTask);
   saveTasks();
   renderTasks();
   taskForm.reset();
+
+  // if you're already standing in this zone, remind right away instead of
+  // waiting for a zone-entry event that already happened before this task existed
+  if (zone === currentZoneName) {
+    notify(zone, [newTask]);
+  }
 });
 
 // Distance in meters between two lat/lng points (Haversine formula)
