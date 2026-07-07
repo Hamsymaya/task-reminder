@@ -17,17 +17,24 @@
 </header>
 
 <main>
+  <section id="addZone">
+    <h2>Create a location</h2>
+    <form id="zoneForm">
+      <input type="text" id="zoneName" placeholder="e.g. Gym, Client office" required>
+      <button type="button" id="captureLocationBtn">📍 Use my current location</button>
+      <p id="capturedCoords" class="empty">No location captured yet</p>
+      <input type="number" id="zoneRadius" placeholder="Radius in meters (default 500)" min="50">
+      <button type="submit" id="saveZoneBtn" disabled>Save location</button>
+    </form>
+    <ul id="zoneList"></ul>
+  </section>
+
   <section id="addTask">
     <h2>Add a task</h2>
     <form id="taskForm">
       <input type="text" id="taskText" placeholder="e.g. Pick up documents" required>
       <select id="taskZone" required>
         <option value="" disabled selected>Where?</option>
-        <option value="Upper Hill">Upper Hill</option>
-        <option value="Westlands">Westlands</option>
-        <option value="Industrial Area">Industrial Area</option>
-        <option value="CBD">City Center (CBD)</option>
-        <option value="Langata">Langata</option>
       </select>
       <button type="submit">Add task</button>
     </form>

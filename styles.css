@@ -54,27 +54,45 @@ h2 { margin-top: 0; font-size: 1.05rem; }
   gap: 0.6rem;
 }
 
-#taskForm input, #taskForm select, #taskForm button {
+#taskForm input, #taskForm select, #taskForm button,
+#zoneForm input, #zoneForm button {
   padding: 0.7rem;
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
-#taskForm button {
+#taskForm button, #zoneForm button {
   background: #1e6f5c;
   color: white;
   border: none;
   font-weight: 600;
 }
 
-#taskList {
+#zoneForm button:disabled {
+  background: #9dbdb4;
+}
+
+#zoneForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#capturedCoords {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+#taskList, #zoneList {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-#taskList li {
+#zoneList { margin-top: 0.8rem; }
+
+#taskList li, #zoneList li {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -82,7 +100,7 @@ h2 { margin-top: 0; font-size: 1.05rem; }
   border-bottom: 1px solid #eee;
 }
 
-#taskList li:last-child { border-bottom: none; }
+#taskList li:last-child, #zoneList li:last-child { border-bottom: none; }
 
 .task-zone {
   font-size: 0.75rem;
