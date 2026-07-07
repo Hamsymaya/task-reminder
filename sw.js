@@ -1,4 +1,4 @@
-const CACHE_NAME = "task-reminder-v2";
+const CACHE_NAME = "task-reminder-v3";
 const FILES = ["./", "index.html", "styles.css", "app.js", "manifest.json", "icon.svg"];
 
 self.addEventListener("install", (event) => {

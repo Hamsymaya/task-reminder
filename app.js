@@ -218,23 +218,47 @@ function handlePosition(position) {
 
 function handleError(err) {
   statusEl.textContent = "Location error: " + err.message;
+  if (err.code === err.PERMISSION_DENIED) {
+    // don't keep silently retrying on future loads once permission is revoked
+    localStorage.removeItem("trackingEnabled");
+    startBtn.disabled = false;
+    startBtn.textContent = "Start tracking my location";
+  }
 }
 
-startBtn.addEventListener("click", async () => {
+function startTracking() {
   if (!("geolocation" in navigator)) {
     statusEl.textContent = "Geolocation not supported on this device";
     return;
-  }
-  if ("Notification" in window && Notification.permission === "default") {
-    await Notification.requestPermission();
   }
   navigator.geolocation.watchPosition(handlePosition, handleError, {
     enableHighAccuracy: true,
     maximumAge: 10000,
     timeout: 20000,
   });
+  localStorage.setItem("trackingEnabled", "true");
   statusEl.textContent = "Location: tracking started...";
+  startBtn.textContent = "Tracking active";
+  startBtn.disabled = true;
+}
+
+startBtn.addEventListener("click", async () => {
+  if ("Notification" in window && Notification.permission === "default") {
+    await Notification.requestPermission();
+  }
+  startTracking();
 });
+
+// resume tracking automatically on reload if it was already on and permission is still granted
+if (localStorage.getItem("trackingEnabled") === "true") {
+  if ("permissions" in navigator) {
+    navigator.permissions.query({ name: "geolocation" }).then(result => {
+      if (result.state === "granted") startTracking();
+    }).catch(() => startTracking());
+  } else {
+    startTracking();
+  }
+}
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});
